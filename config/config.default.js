@@ -3,6 +3,13 @@
 'use strict';
 
 const path = require('path');
+const I18n = require('i18n');
+
+I18n.configure({
+  locales: [ 'en', 'cn' ],
+  defaultLocale: 'cn',
+  directory: __dirname + '/locales',
+});
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -48,8 +55,12 @@ module.exports = appInfo => {
     expiresIn: 60 * 60 * 24,
   };
   config.validate = {
-    convert: true,
+    // convert: true,
     // validateRoot: false,
+    translate() {
+      const args = Array.prototype.slice.call(arguments);
+      return I18n.__.apply(I18n, args);
+    },
   };
 
   return {

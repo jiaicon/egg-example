@@ -4,6 +4,8 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const I18n = require('i18n');
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -22,7 +24,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 class BasicController extends Controller {
-  async send(data, code, msg) {
+  async send(data, code, msg, errors) {
     const { ctx } = this;
     if (!code || (code >= 200 && code < 300)) {
       ctx.body = {
@@ -36,7 +38,8 @@ class BasicController extends Controller {
     ctx.body = {
       data,
       status: false,
-      msg: msg || codeMessage[code],
+      msg: I18n.__.apply(I18n, [ msg || codeMessage[code] ]),
+      errors,
     };
     ctx.status = code;
   }

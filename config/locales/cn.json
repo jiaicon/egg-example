@@ -1,0 +1,8 @@
+{
+	"should be a number": "应该是一个数字",
+	"invalid": "无效",
+	"should be an email": "邮箱格式错误",
+	"Validation Failed": "字段验证失败",
+	"length should bigger than %s": "长度不能低于 %s",
+	"账号或密码错误": "账号或密码错误"
+}

@@ -15,5 +15,8 @@ module.exports = app => {
   router.put('/api/user', controller.userControler.edit);
   router.get('/api/currentUser', verifyToken, controller.userControler.currentUser);
   router.get('/api/logout', controller.userControler.logout);
+
+  //
+  router.get('/api/unit', verifyToken, controller.unitController.list);
 };
 

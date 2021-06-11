@@ -13,4 +13,13 @@ module.exports = app => {
     }
     return true;
   });
+  // 校验密码是否正确
+  // validator.addRule('passWord', (rule, value) => {
+  //   if (/^\d+$/.test(value)) {
+  //     return '密码应该是字符串';
+  //   } else if (value.length < 5 || value.length > 10) {
+  //     return '密码的长度应该在5-10之间';
+  //   }
+  //   return true;
+  // });
 };

@@ -1,6 +1,5 @@
 'use strict';
 
-const Controller = require('egg').Controller;
 const BasicController = require('./basicController');
 
 class UserController extends BasicController {
@@ -12,14 +11,14 @@ class UserController extends BasicController {
         password: 'password',
       });
     } catch (e) {
-      return await this.send(null, 422, e);
+      return await this.send(null, 322, e.message, e.errors);
     }
     try {
       const user = await ctx.service.userService.login(ctx.request.body);
       if (user) {
         return await this.send(user, 200, '获取成功');
       }
-      return await this.send(null, 401, '账号或密码错误');
+      return await this.send(null, 322, '账号或密码错误');
     } catch (e) {
       await this.send(null, 500, e.message);
     }
@@ -45,11 +44,11 @@ class UserController extends BasicController {
     try {
       ctx.validate({
         userName: 'userName',
-        password: 'password',
+        password: 'passWord',
         phone: 'string',
       });
     } catch (e) {
-      return await this.send(null, 422, e);
+      return await this.send(null, 322, e.message, e.errors);
     }
     try {
       const res = await ctx.service.userService.register(ctx.request.body);
@@ -79,7 +78,7 @@ class UserController extends BasicController {
         },
       });
     } catch (e) {
-      return await this.send(null, 422, e);
+      return await this.send(null, 322, e.message, e.errors);
     }
     try {
       const res = await ctx.service.userService.edit(ctx.request.body);
